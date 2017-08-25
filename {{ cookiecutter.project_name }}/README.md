@@ -1,5 +1,8 @@
 {{ cookiecutter.project_name }}
 ==========
+Updates
+-------
+Updated original Mozilla's package to support Django 1.11, python3 only and pip-complie
 
 [![Build Status](https://img.shields.io/travis/mozilla/{{ cookiecutter.project_name }}/master.svg)](https://travis-ci.org/mozilla/{{ cookiecutter.project_name }})
 
@@ -52,15 +55,3 @@ Heroku
 2. heroku config:set DEBUG=False ALLOWED_HOSTS=<foobar>.herokuapp.com, SECRET_KEY=something_secret
    DATABASE_URL gets populated by heroku once you setup a database.
 3. git push heroku master
-
-
-NewRelic Monitoring
--------------------
-
-A newrelic.ini file is already included. To enable NewRelic monitoring
-add two enviroment variables:
-
- - NEW_RELIC_LICENSE_KEY
- - NEW_RELIC_APP_NAME
-
-See the [full list of supported environment variables](https://docs.newrelic.com/docs/agents/python-agent/installation-configuration/python-agent-configuration#environment-variables).
