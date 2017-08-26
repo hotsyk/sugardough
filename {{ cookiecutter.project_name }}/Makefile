@@ -20,6 +20,7 @@ bootstrap:
 	make install
 
 requirements:
+	pip install pip-tools
 	$(PIPCOMPILE) requirements.in
 
 upgragerequirements:

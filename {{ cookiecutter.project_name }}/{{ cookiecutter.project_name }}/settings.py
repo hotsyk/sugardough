@@ -2,10 +2,10 @@
 Django settings for {{ cookiecutter.project_name }} project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.9/topics/settings/
+https://docs.djangoproject.com/en/1.11/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.9/ref/settings/
+https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
@@ -51,6 +51,14 @@ INSTALLED_APPS = [
 
 for app in config('EXTRA_APPS', default='', cast=Csv()):
     INSTALLED_APPS.append(app)
+
+SENTRY_URI = config('SENTRY_URI')
+SENTRY_JS_URI = config('SENTRY_JS_URI')
+
+SENTRY_ENABLED = not DEBUG
+
+if SENTRY_ENABLED:
+    INSTALLED_APPS.append('raven.contrib.django.raven_compat')
 
 
 MIDDLEWARE_CLASSES = (
@@ -138,35 +146,35 @@ TEMPLATES = [
 CSP_DEFAULT_SRC = (
     "'self'",
 )
-CSP_FONT_SRC = (
-    "'self'",
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-    'http://*.mozilla.org',
-    'https://*.mozilla.org',
-)
-CSP_IMG_SRC = (
-    "'self'",
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-    'http://*.mozilla.org',
-    'https://*.mozilla.org',
-)
-CSP_SCRIPT_SRC = (
-    "'self'",
-    'http://*.mozilla.org',
-    'https://*.mozilla.org',
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-)
-CSP_STYLE_SRC = (
-    "'self'",
-    "'unsafe-inline'",
-    'http://*.mozilla.org',
-    'https://*.mozilla.org',
-    'http://*.mozilla.net',
-    'https://*.mozilla.net',
-)
+# CSP_FONT_SRC = (
+#     "'self'",
+#     'http://*.mozilla.net',
+#     'https://*.mozilla.net',
+#     'http://*.mozilla.org',
+#     'https://*.mozilla.org',
+# )
+# CSP_IMG_SRC = (
+#     "'self'",
+#     'http://*.mozilla.net',
+#     'https://*.mozilla.net',
+#     'http://*.mozilla.org',
+#     'https://*.mozilla.org',
+# )
+# CSP_SCRIPT_SRC = (
+#     "'self'",
+#     'http://*.mozilla.org',
+#     'https://*.mozilla.org',
+#     'http://*.mozilla.net',
+#     'https://*.mozilla.net',
+# )
+# CSP_STYLE_SRC = (
+#     "'self'",
+#     "'unsafe-inline'",
+#     'http://*.mozilla.org',
+#     'https://*.mozilla.org',
+#     'http://*.mozilla.net',
+#     'https://*.mozilla.net',
+# )
 CSP_REPORT_ONLY = config('CSP_REPORT_ONLY', default=False)
 
 # This is needed to get a CRSF token in /admin

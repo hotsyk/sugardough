@@ -36,6 +36,7 @@ pytest-runfailed
 pytest-xdist
 pytest
 pytz
+raven
 requests
 urlwait
 whitenoise
